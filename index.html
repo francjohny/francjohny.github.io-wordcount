@@ -9,7 +9,7 @@
         $(document).ready(function () {
             $("#review-form").submit(e => {
                 e.preventDefault();
-                $.post("http://localhost:8082/topics/session", {
+                $.post("//localhost:8082/topics/session", {
                     text: {"records": [{"value": $("#review").val()}]},
                     contentType: "application/vnd.kafka.json.v2+json"
                 })
