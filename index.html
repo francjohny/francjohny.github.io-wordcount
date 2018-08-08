@@ -10,7 +10,8 @@
             $("#review-form").submit(e => {
                 e.preventDefault();
                 $.post("localhost:8082/topics/session", {
-                    text: $("#review").val()
+                    text: {"records": [{"value": $("#review").val()}]},
+                    contentType: "application/json; charset=utf-8"
                 })
                     .done(() => {
                         alert("message posted to kafka for processing by spark");
