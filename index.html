@@ -3,12 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>What is Apache Spark?</title>
-    <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="index.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#review-form").submit(e => {
+                e.preventDefault();
+                $.post("localhost:8082", {
+                    text: $("#review").val()
+                })
+                    .done(() => {
+                        alert("message posted to kafka for processing by spark");
+                    })
+                    .fail(function () {
+                        alert("something went wrong. Please try again later");
+                    });
+            });
+        })
+    </script>
 </head>
 <body>
-<form id="review-form" method="POST">
+<form id="review-form">
     <div>
         <input type="text" id="review" name="review" placeholder="How was today's session?">
         <button>Submit</button>
