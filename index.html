@@ -9,7 +9,7 @@
         $(document).ready(function () {
             $("#review-form").submit(e => {
                 e.preventDefault();
-                let records = $("#review").val().split(" ").map(split => {
+                let records = $("#review").val().trim().split(" ").map(split => {
                     return {"value": split}
                 });
                 fetch('http://localhost:8082/topics/session', {
