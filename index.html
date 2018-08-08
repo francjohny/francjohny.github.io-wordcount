@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!--<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">-->
     <title>What is Apache Spark?</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -10,17 +9,15 @@
         $(document).ready(function () {
             $("#review-form").submit(e => {
                 e.preventDefault();
-                $.ajax("http://localhost:8082/topics/session", {
-                    type: "POST",
-                    text: {"records": [{"value": {"review": $("#review").val()}}]},
-                    contentType: "application/vnd.kafka.json.v2+json"
+                fetch('http://localhost:8082/topics/session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/vnd.kafka.json.v2+json'
+                    },
+                    body: JSON.stringify({"records": [{"value": $("#review").val()}]})
                 })
-                    .done(() => {
-                        alert("message posted to kafka for processing by spark");
-                    })
-                    .fail(function () {
-                        alert("something went wrong. Please try again later");
-                    });
+                    .then(() => alert("message posted to kafka for processing by spark"))
+                    .catch(e => alert("something went wrong. Please try again later"));
             });
         })
     </script>
