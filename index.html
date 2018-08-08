@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <!--<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">-->
     <title>What is Apache Spark?</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -10,7 +10,8 @@
         $(document).ready(function () {
             $("#review-form").submit(e => {
                 e.preventDefault();
-                $.post("http://localhost:8082/topics/session", {
+                $.ajax("http://localhost:8082/topics/session", {
+                    type: "POST",
                     text: {"records": [{"value": {"review": $("#review").val()}}]},
                     contentType: "application/vnd.kafka.json.v2+json"
                 })
