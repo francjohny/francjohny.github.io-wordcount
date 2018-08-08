@@ -9,12 +9,15 @@
         $(document).ready(function () {
             $("#review-form").submit(e => {
                 e.preventDefault();
+                let records = $("#review").val().split(" ").map(split => {
+                    return {"value": split}
+                });
                 fetch('http://localhost:8082/topics/session', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/vnd.kafka.json.v2+json'
                     },
-                    body: JSON.stringify({"records": [{"value": $("#review").val()}]})
+                    body: JSON.stringify({"records": records})
                 })
                     .then(() => alert("message posted to kafka for processing by spark"))
                     .catch(e => alert("something went wrong. Please try again later"));
