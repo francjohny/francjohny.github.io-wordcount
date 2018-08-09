@@ -12,7 +12,7 @@
                 let records = $("#review").val().trim().split(" ").map(split => {
                     return {"value": split}
                 });
-                fetch('http://localhost:8082/topics/session', {
+                fetch('http://223.228.167.152:8082/topics/session', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/vnd.kafka.json.v2+json'
